@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>To-Do List Application</h1>
+  <p>Hello Sir! Start your day with the pre-planned schedule. Tap to Get started!</p>
+  <div class="container">
+    <input type="text" id="taskInput" placeholder="Add new task">
+    <button onclick="addTask()" id="add">Add Task</button>
+  </div>
+
+  <div class="Elements">
+    <ul id="taskList">
+        <!-- Hello this is your task. Your task looks like this -->
+    </ul>
+  </div>
+
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  background-image: url("notes.jpg");
+  background-size: 1600px;
+}
+  body h1{
+    justify-content: center;
+    margin-top: 130px;
+    margin-left: 26%;
+  }
+  body p{
+    margin-left: 22%;
+    max-width: 400px;
+    line-height: 25px;
+    margin-bottom: 70px;
+  }
+
+h1 {
+  margin-bottom: 80px;
+  color: #0e0d0d;
+  margin-top: 0;
+}
+
+.container {
+  margin-left: 22%;
+  max-width: 400px;
+  margin-top: 0px;
+  padding-top: 20px;
+  padding-right: 0%;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+input[type="text"] {
+  width: 70%;
+  padding: 5px;
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  height: 25px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+#add:hover {
+  background-color: #0056b3;
+}
+
+.Elements ul {
+  margin-top: -330px;
+  margin-left: 57%;
+  padding: 20px;
+  max-width: 400px;
+  /* background-color: #f4f4f4; */
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #cababa;
+  border-radius: 4px;
+}
+.edit-button{
+  background: fixed;
+  background-color: #4179b4;
+  margin-left: 20px;
+}
+.complete-button{
+  background: fixed;
+  background-color: rgb(78, 156, 78);
+}
+.delete-button{
+  background: fixed;
+  background-color: rgb(250, 72, 72);
+}
+
+
+.edit-button:hover{
+  background-color: #033b77;
+}
+.delete-button:hover{
+  background-color: rgb(255, 4, 4);
+}
+.complete-button:hover{
+  background-color: green;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #999;
+}
+
+  </style>
+
+
+  <script>
+
+
+    
+    function addTask() {
+          var input = document.getElementById("taskInput");
+          var task = input.value;
+          if (task === "") {
+            alert("Please enter a task!");
+            return;
+          }
+
+          var ul = document.getElementById("taskList");
+          var li = document.createElement("li");
+          var textNode = document.createTextNode(task);
+          li.appendChild(textNode);
+
+          var editButton = document.createElement("button");
+          editButton.innerHTML = "Edit";
+          editButton.className = "edit-button";
+          editButton.onclick = function() {
+            var newText = prompt("Edit task:", task);
+            if (newText !== null && newText !== "") {
+              textNode.nodeValue = newText;
+            }
+          };
+          li.appendChild(editButton);
+
+          var deleteButton = document.createElement("button");
+          deleteButton.innerHTML = "Delete";
+          deleteButton.className = "delete-button";
+          deleteButton.onclick = function() {
+            ul.removeChild(li);
+          };
+          li.appendChild(deleteButton);
+
+          var completeButton = document.createElement("button");
+          completeButton.innerHTML = "Completed";
+          completeButton.className = "complete-button";
+          completeButton.onclick = function() {
+          li.classList.toggle("completed");
+          };
+          li.appendChild(completeButton);
+
+          ul.appendChild(li);
+
+          input.value = ""; 
+        }
+
+
+  </script>
+</body>
+</html>
